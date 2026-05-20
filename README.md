@@ -18,7 +18,7 @@ The result is more focused work, smaller context windows (better token efficienc
 
 ### Domains
 
-The crew is organized around nine capability domains, each covering a distinct area of the development lifecycle:
+The crew is organized around ten capability domains, each covering a distinct area of the development lifecycle:
 
 | Domain | What it covers |
 |---|---|
@@ -61,7 +61,7 @@ You don't have to use all three phases for every task. A small bug fix might go 
 
 ### Agents (`agents/`)
 
-27 agent files. Claude Code loads these automatically and routes to the appropriate agent based on what you ask for. You can also ask directly: *"use the security-planner to review the auth flow."*
+30 agent files. Claude Code loads these automatically and routes to the appropriate agent based on what you ask for. You can also ask directly: *"use the security-planner to review the auth flow."*
 
 ### Skills (`skills/`)
 
@@ -108,7 +108,7 @@ Open a new Claude Code session to activate the agents and skills.
 ### Verify the install
 
 ```
-ls ~/.claude/agents/   # should show 27 .md files
+ls ~/.claude/agents/   # should show 30 .md files
 ls ~/.claude/skills/   # should show 8 directories
 ```
 
