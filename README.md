@@ -29,7 +29,8 @@ The crew is organized around nine capability domains, each covering a distinct a
 | `impl` | Feature development, code implementation |
 | `quality` | Testing strategy, test writing, coverage |
 | `security` | Threat modeling, vulnerability review, hardening |
-| `content` | Documentation, READMEs, changelogs |
+| `docs` | READMEs, API reference, changelogs, architecture docs, runbooks |
+| `content` | Brand voice, UX writing, microcopy, marketing copy, style guides, user-facing help |
 | `devops` | Infrastructure, CI/CD, deployment |
 
 ### Phases
@@ -42,7 +43,7 @@ Every domain has three agents, one per phase:
 | Build | `-implementer` | Executes the plan and produces output | Yes |
 | Check | `-validator` | Reviews the output and flags issues | No — read only |
 
-So the full crew is **27 agents**: 9 domains × 3 phases.
+So the full crew is **30 agents**: 10 domains × 3 phases.
 
 ### The planner → implementer → validator pattern
 
