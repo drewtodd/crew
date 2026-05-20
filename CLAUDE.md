@@ -108,6 +108,6 @@ This project uses a structured agent crew. Each domain has three specialized age
 | `-implementer` | Build | Writes code and files — full access |
 | `-validator` | Check | Reviews and verifies — read-only |
 
-**Domains:** `arch`, `req`, `ux`, `design`, `impl`, `quality`, `security`, `docs`, `content`, `devops`
+**Domains:** `arch`, `req`, `ux`, `design`, `impl`, `quality`, `security`, `data`, `analytics`, `docs`, `content`, `devops`
 
 When asking Claude to do domain-specific work, it will route to the appropriate agent automatically. You can also ask directly: "use the arch-planner to..."

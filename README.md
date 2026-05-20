@@ -18,7 +18,7 @@ The result is more focused work, smaller context windows (better token efficienc
 
 ### Domains
 
-The crew is organized around ten capability domains, each covering a distinct area of the development lifecycle:
+The crew is organized around twelve capability domains, each covering a distinct area of the development lifecycle:
 
 | Domain | What it covers |
 |---|---|
@@ -29,6 +29,8 @@ The crew is organized around ten capability domains, each covering a distinct ar
 | `impl` | Feature development, code implementation |
 | `quality` | Testing strategy, test writing, coverage |
 | `security` | Threat modeling, vulnerability review, hardening |
+| `data` | Database schema, SQLAlchemy models, Alembic migrations, seed data |
+| `analytics` | Campaign analysis, user behavior, segmentation, data-driven decisions |
 | `docs` | READMEs, API reference, changelogs, architecture docs, runbooks |
 | `content` | Brand voice, UX writing, microcopy, marketing copy, style guides, user-facing help |
 | `devops` | Infrastructure, CI/CD, deployment |
@@ -37,13 +39,15 @@ The crew is organized around ten capability domains, each covering a distinct ar
 
 Every domain has three agents, one per phase:
 
-| Phase | Agent suffix | What it does | Can it write files? |
-|---|---|---|---|
-| Design | `-planner` | Researches, proposes, and documents a plan | No — read only |
-| Build | `-implementer` | Executes the plan and produces output | Yes |
-| Check | `-validator` | Reviews the output and flags issues | No — read only |
+| Phase | Agent suffix | What it does | Writes files? | Model |
+|---|---|---|---|---|
+| Design | `-planner` | Researches, proposes, and documents a plan | No | sonnet |
+| Build | `-implementer` | Executes the plan and produces output | Yes | sonnet |
+| Check | `-validator` | Reviews the output and flags issues | No | haiku* |
 
-So the full crew is **30 agents**: 10 domains × 3 phases.
+*Most validators use `haiku` — checking and auditing are pattern-recognition tasks that don't need the full reasoning budget. Two exceptions: `ux-validator` and `security-validator` use `sonnet` because their reviews require contextual judgment, not just pattern-matching. One more: `analytics` uses an `-interpreter` instead of a `-validator`, also on `sonnet`, because synthesis and scrutiny are inseparable in that domain.
+
+So the full crew is **36 agents** across 12 domains.
 
 ### The planner → implementer → validator pattern
 
@@ -53,6 +57,8 @@ This three-phase pattern enforces a discipline that's easy to skip when you're w
 2. **Implementer** executes against the plan — writes code, creates files, makes changes.
 3. **Validator** audits the result — reads the code, runs checks, and reports findings without modifying anything.
 
+The `analytics` domain is a principled exception: its third agent is `analytics-interpreter` rather than `analytics-validator`. In analytics, interpreting findings and scrutinizing methodology are inseparable — there's no "checking the code" separate from "reading what it means."
+
 You don't have to use all three phases for every task. A small bug fix might go straight to the implementer. A major architectural decision might only involve the planner.
 
 ---
@@ -61,7 +67,7 @@ You don't have to use all three phases for every task. A small bug fix might go 
 
 ### Agents (`agents/`)
 
-30 agent files. Claude Code loads these automatically and routes to the appropriate agent based on what you ask for. You can also ask directly: *"use the security-planner to review the auth flow."*
+36 agent files. Claude Code loads these automatically and routes to the appropriate agent based on what you ask for. You can also ask directly: *"use the security-planner to review the auth flow."*
 
 ### Skills (`skills/`)
 
@@ -105,10 +111,22 @@ The install script symlinks everything into `~/.claude/`. Updates to the repo ar
 
 Open a new Claude Code session to activate the agents and skills.
 
+### Windows (native PowerShell)
+
+```powershell
+git clone https://github.com/drewtodd/crew.git $env:USERPROFILE\Projects\crew
+cd $env:USERPROFILE\Projects\crew
+.\install.ps1
+```
+
+Agent files are **copied** rather than symlinked on Windows — re-run `install.ps1` after pulling updates to pick up changes. Skill directories use junctions, which don't require administrator privileges or Developer Mode.
+
+**WSL users:** Follow the macOS/Linux instructions inside your WSL terminal instead.
+
 ### Verify the install
 
 ```
-ls ~/.claude/agents/   # should show 30 .md files
+ls ~/.claude/agents/   # should show 36 .md files
 ls ~/.claude/skills/   # should show 8 directories
 ```
 
